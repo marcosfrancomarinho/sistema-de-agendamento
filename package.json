@@ -1,0 +1,26 @@
+{
+	"name": "app_agendamento",
+	"version": "1.0.0",
+	"main": "dist/bundle.js",
+	"license": "MIT",
+	"scripts": {
+		"dev": "tsx src/app.ts",
+		"start": "node dist/bundle.js",
+		"build": "node esbuild.config.js",
+		"check": "tsc --watch --noEmit"
+	},
+	"devDependencies": {
+		"@types/cors": "^2.8.17",
+		"@types/express": "^5.0.0",
+		"@types/node": "^22.13.0",
+		"@types/pg": "^8.11.11",
+		"esbuild": "^0.24.2",
+		"tsx": "^4.19.2",
+		"typescript": "^5.7.3"
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.21.2",
+		"pg": "^8.13.1"
+	}
+}
