@@ -3,14 +3,9 @@ import { ICreateSchedulingServices } from "../@types/services/create.scheduling.
 
 export class CreateSchedulingServices implements ICreateSchedulingServices {
 	constructor(private createSchedulingAdapter: ICreateSchedulingAdapter) {}
-	public createNewScheduling = async (name: string, email: string, phone: string, data_hour: string): Promise<IQueryResult> => {
+	public add = async (name: string, email: string, phone: string, data_hour: string): Promise<IQueryResult> => {
 		try {
-			const responseQueryDatabase: IQueryResult = await this.createSchedulingAdapter.insertNewSchedule(
-				name,
-				email,
-				phone,
-				data_hour
-			);
+			const responseQueryDatabase: IQueryResult = await this.createSchedulingAdapter.insertDb(name, email, phone, data_hour);
 			return responseQueryDatabase;
 		} catch (error) {
 			throw error as Error;

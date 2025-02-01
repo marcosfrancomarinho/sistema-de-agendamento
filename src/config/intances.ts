@@ -1,9 +1,15 @@
 import { CreateSchedulingControlllers } from "../controllers/create.scheduling.controllers";
-import { CreteSchedulingAdapter } from "../integrations/create.scheduling.adapter";
+import { CreateSchedulingAdapter } from "../integrations/create.scheduling.adapter";
 import { CreateSchedulingServices } from "../services/create.scheduling.services";
 
-const creteSchedulingAdapter = new CreteSchedulingAdapter();
-const createSchedulingServices = new CreateSchedulingServices(creteSchedulingAdapter);
-const createSchedulingControlllers = new CreateSchedulingControlllers(createSchedulingServices);
+import { CheckDatasBodyRequestMiddleware } from "../middleware/check.datas.body.request.middleware";
+import { VerifyDatasAdapter } from "../integrations/verify.datas.adapter";
 
-export { createSchedulingControlllers };
+const createSchedulingAdapter = new CreateSchedulingAdapter();
+const createSchedulingServices = new CreateSchedulingServices(createSchedulingAdapter);
+const createSchedulingControllers = new CreateSchedulingControlllers(createSchedulingServices);
+
+const verifyDatasAdapter = new VerifyDatasAdapter();
+const checkDatasBodyRequestMiddleware = new CheckDatasBodyRequestMiddleware(verifyDatasAdapter);
+
+export { createSchedulingControllers, checkDatasBodyRequestMiddleware };

@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 
 export interface ICreateSchedulingControllers {
-	addNewScheduling(request: Request, response: Response, next: NextFunction): Promise<void>;
+	execute(request: Request, response: Response, next: NextFunction): Promise<void>;
 }
 export type IScheduleData = {
 	name: string;

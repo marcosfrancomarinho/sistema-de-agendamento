@@ -1,6 +1,6 @@
 import { ICreateSchedulingAdapter, IQueryResult } from "../@types/integrations/create.scheduling";
 import { connectionToDatabase } from "../config/database";
-export class CreteSchedulingAdapter implements ICreateSchedulingAdapter {
+export class CreateSchedulingAdapter implements ICreateSchedulingAdapter {
 	private sql = (): string => {
 		return `
                 INSERT INTO scheduling_user ( 
@@ -15,7 +15,7 @@ export class CreteSchedulingAdapter implements ICreateSchedulingAdapter {
                     $4
                 ) RETURNING id`;
 	};
-	public insertNewSchedule = async (name: string, email: string, phone: string, data_hour: string): Promise<IQueryResult> => {
+	public insertDb = async (name: string, email: string, phone: string, data_hour: string): Promise<IQueryResult> => {
 		try {
 			const { rows } = await connectionToDatabase.query<IQueryResult>(this.sql(), [name, email, phone, data_hour]);
 			return rows.at(0) as IQueryResult;
