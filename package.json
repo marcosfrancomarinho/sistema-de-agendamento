@@ -4,10 +4,11 @@
 	"main": "dist/bundle.js",
 	"license": "MIT",
 	"scripts": {
-		"dev": "tsx src/app.ts",
-		"start": "node dist/bundle.js",
+		"dev": "tsx --env-file=.env src/app.ts",
+		"start": "node --env-file=.env dist/bundle.js",
 		"build": "node esbuild.config.js",
-		"check": "tsc --watch --noEmit"
+		"check": "tsc --watch --noEmit",
+		"db": "tsx --env-file=.env src/integrations/create.scheduling.ts"
 	},
 	"devDependencies": {
 		"@types/cors": "^2.8.17",

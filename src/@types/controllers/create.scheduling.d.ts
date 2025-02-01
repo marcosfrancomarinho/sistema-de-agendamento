@@ -1,0 +1,15 @@
+import { Response, Request, NextFunction } from "express";
+
+export interface ICreateSchedulingControllers {
+	addNewScheduling(request: Request, response: Response, next: NextFunction): Promise<void>;
+}
+export type IScheduleData = {
+	name: string;
+	email: string;
+	phone: string;
+	data_hour: string;
+};
+export type IMessageSuccess = {
+	message: string;
+	idUser: string;
+};

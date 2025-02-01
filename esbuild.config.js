@@ -6,5 +6,7 @@ build({
 	external: ["express", "cors", "pg"],
 	minify: true,
 	bundle: true,
+	sourcemap:true,
+	minifyWhitespace:true,
 	target: ["es6"],
 });
