@@ -7,8 +7,8 @@ export class CheckDatasBodyRequestMiddleware implements ICheckDatasBodyRequestMi
 	constructor(private verifyDatasAdapter: IVerifyDatasAdapter) {}
 	public valiadate = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
 		try {
-			const { name, email, phone, data_hour } = request.body as IScheduleData;
-			await this.verifyDatasAdapter.checkDatasBodyRequest(name, email, phone, data_hour);
+			const { name, email, phone, datahours } = request.body as IScheduleData;
+			await this.verifyDatasAdapter.checkDatasBodyRequest(name, email, phone, datahours);
 			next();
 		} catch (error) {
 			response.status(400).json({ error: (error as Error).message });

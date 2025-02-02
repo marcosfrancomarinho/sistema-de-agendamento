@@ -11,10 +11,18 @@ export class CreateSchedulingControlllers implements ICreateSchedulingController
 			idUser: id,
 		};
 	};
+	private getSchedulingDaRequest = (request: Request): IScheduleData => {
+		const { datahour, ...rest } = request.body;
+		const _date_hour_converted_format_date: Date = new Date(datahour);
+		return {
+			dataHour: _date_hour_converted_format_date,
+			...rest,
+		} as IScheduleData;
+	};
 	public execute = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
 		try {
-			const { name, email, phone, data_hour } = request.body as IScheduleData;
-			const { id }: IQueryResult = await this.createSchedulingServices.add(name, email, phone, data_hour);
+			const { name, email, phone, datahours } = this.getSchedulingDaRequest(request);
+			const { id }: IQueryResult = await this.createSchedulingServices.add(name, email, phone, datahours);
 			response.status(201).json(this.messageSuccess(id));
 		} catch (error) {
 			next(error);

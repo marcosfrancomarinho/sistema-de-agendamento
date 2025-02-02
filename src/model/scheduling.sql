@@ -4,6 +4,6 @@ CREATE TABLE
         name VARCHAR NOT NULL,
         email VARCHAR NOT NULL,
         phone VARCHAR NOT NULL,
-        data_hours TIMESTAMP
+        datahours TIMESTAMP
     );
 

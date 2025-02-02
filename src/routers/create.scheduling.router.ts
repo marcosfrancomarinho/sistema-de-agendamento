@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createSchedulingControllers, checkDatasBodyRequestMiddleware } from "../config/intances";
+import { createSchedulingControllers, checkDatasBodyRequestMiddleware } from "../configs/intances";
 
 const createSchedulingRouter = Router();
 

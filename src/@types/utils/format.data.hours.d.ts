@@ -1,5 +1,5 @@
 export interface IFormatDataHours {
-	format(data_hour: Date): IResponseFormatDataHours;
+	format(datahours: Date): IResponseFormatDataHours;
 }
 export type IResponseFormatDataHours = {
 	hours: number;

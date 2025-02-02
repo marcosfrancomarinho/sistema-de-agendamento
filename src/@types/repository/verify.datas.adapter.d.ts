@@ -1,3 +1,3 @@
 export interface IVerifyDatasAdapter {
-	checkDatasBodyRequest(name: string, email: string, phone: string, data_hour: Date): Promise<void>;
+	checkDatasBodyRequest(name: string, email: string, phone: string, datahours: Date): Promise<void>;
 }

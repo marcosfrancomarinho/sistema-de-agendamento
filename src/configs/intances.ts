@@ -11,7 +11,7 @@ import { FormatDataHours } from "../utils/format.data.hours";
 const createSchedulingAdapter = new CreateSchedulingAdapter();
 const searchSchedulingAdapter = new SearchSchedulingAdapter();
 const formatDataHours = new FormatDataHours();
-const createSchedulingServices = new CreateSchedulingServices(createSchedulingAdapter, searchSchedulingAdapter, formatDataHours);
+const createSchedulingServices = new CreateSchedulingServices(createSchedulingAdapter);
 const createSchedulingControllers = new CreateSchedulingControlllers(createSchedulingServices);
 
 const verifyDatasAdapter = new VerifyDatasAdapter();
