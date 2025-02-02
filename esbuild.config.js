@@ -6,6 +6,7 @@ build({
 	external: ["express", "cors", "pg", 'joi'],
 	minify: true,
 	bundle: true,
+	format:"cjs",
 	sourcemap: true,
 	target: ["ES6"],
 }).catch(() => process.exit(1));
