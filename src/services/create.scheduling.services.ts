@@ -14,7 +14,6 @@ export class CreateSchedulingServices implements ICreateSchedulingServices {
 			this.responseQueryInsertDatabase = await this.createSchedulingAdapter.insertDb(name, email, phone, datahours);
 			return this.responseQueryInsertDatabase;
 		} catch (error) {
-			console.log(error)
 			throw error as Error;
 		}
 	};
