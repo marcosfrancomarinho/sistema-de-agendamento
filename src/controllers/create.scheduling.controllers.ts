@@ -12,10 +12,10 @@ export class CreateSchedulingControlllers implements ICreateSchedulingController
 		};
 	};
 	private getSchedulingDaRequest = (request: Request): IScheduleData => {
-		const { datahour, ...rest } = request.body;
-		const _date_hour_converted_format_date: Date = new Date(datahour);
+		const { datahours, ...rest } = request.body;
+		const _date_hour_converted_format_date: Date = new Date(datahours);
 		return {
-			dataHour: _date_hour_converted_format_date,
+			datahours: _date_hour_converted_format_date,
 			...rest,
 		} as IScheduleData;
 	};

@@ -1,53 +1,58 @@
 import { IResponseSearchDataBase, ISearchSchedulingAdapter } from "../@types/repository/search.scheduling.adapter";
 import { ICheckAppointmentServices } from "../@types/services/check.appointment.services";
-import { SearchSchedulingAdapter } from "../repository/search.scheduling.adapter";
 
 export class CheckAppointmentServices implements ICheckAppointmentServices {
-	private intervalMinutes: number = 30;
-	private currentTime: Date;
+	private serviceTime: number = 30;
+	private currentHours: Date;
 	private searchSchedulingAdapter: ISearchSchedulingAdapter;
 
 	constructor(searchSchedulingAdapter: ISearchSchedulingAdapter) {
-		this.currentTime = new Date();
+		this.currentHours = new Date();
 		this.searchSchedulingAdapter = searchSchedulingAdapter;
 	}
-	private pastCheduleChecker = (datahours: Date): void => {
-		this.currentTime.setSeconds(0, 0);
-		datahours.setSeconds(0, 0);
-		if (datahours.getTime() <= this.currentTime.getTime())
+	private pastsCheduleChecker = (scheduledDateAndTimes: Date): void => {
+		this.currentHours.setSeconds(0, 0);
+		if (scheduledDateAndTimes.getTime() <= this.currentHours.getTime())
 			throw new Error("não pode informar uma data passada ou já agendada.");
 	};
-	private appointmentAvailabilityChecker = (datahours: Date): void => {
+	private reserveTime = (scheduledDateAndTimes: Date, indice: number) => {
 		const time: Date = new Date(
-			datahours.getFullYear(),
-			datahours.getMonth(),
-			datahours.getDate(),
-			datahours.getHours(),
-			datahours.getMinutes(),
+			scheduledDateAndTimes.getFullYear(),
+			scheduledDateAndTimes.getMonth(),
+			scheduledDateAndTimes.getDate(),
+			scheduledDateAndTimes.getHours(),
+			scheduledDateAndTimes.getMinutes(),
 			0
 		);
-		datahours.setSeconds(0, 0);
-		time.setMinutes(time.getMinutes() + this.intervalMinutes);
-		console.log(`DATA FUTURA ${time.getTime()}`);
-		console.log(`DATA AGENDADA ${datahours.getTime()}`);
-		if (datahours.getTime() >= time.getTime() && datahours.getTime() <= time.getTime())
-			throw new Error("horário de agendamento indisponivel");
+		time.setMinutes(time.getMinutes() + this.serviceTime * indice);
+		return time;
 	};
-	public check = async (dataHourCheduling: Date): Promise<any> => {
+	private businessHoursPicker = (requestedDateAndTime: Date): void => {
+		//logica referente aos horario comercial de funcionamento
+	};
+	private appointmentAvailabilityChecker = (requestedDateAndTime: Date, scheduledDateAndTimes: Date): void => {
+		scheduledDateAndTimes.setSeconds(0, 0);
+		const alreadyBusyHours: Date = this.reserveTime(scheduledDateAndTimes, 1);
+		const unavailableHours: Date = this.reserveTime(scheduledDateAndTimes, -1);
+		if (
+			requestedDateAndTime.getTime() <= alreadyBusyHours.getTime() &&
+			requestedDateAndTime.getTime() >= unavailableHours.getTime()
+		) {
+			throw new Error("horário de agendamento indisponível ou ocupado");
+		}
+	};
+	public check = async (scheduledDateAndTimes: Date): Promise<boolean> => {
 		try {
-			this.pastCheduleChecker(dataHourCheduling);
-			const responseQuerySearchtDatabase: IResponseSearchDataBase[] = await this.searchSchedulingAdapter.selectDb();
-			if (responseQuerySearchtDatabase.length === 0) return;
-			responseQuerySearchtDatabase.forEach((scheduling) => {
-				this.appointmentAvailabilityChecker(scheduling.datahours);
-			});
+			scheduledDateAndTimes.setSeconds(0, 0);
+			this.pastsCheduleChecker(scheduledDateAndTimes);
+			const responseQuerySearchDatabase: IResponseSearchDataBase[] = await this.searchSchedulingAdapter.selectDb();
+			if (responseQuerySearchDatabase.length === 0) return true;
+			for (const { datahours } of responseQuerySearchDatabase) {
+				this.appointmentAvailabilityChecker(datahours, scheduledDateAndTimes);
+			}
+			return true;
 		} catch (error) {
-			console.log(error);
+			throw error as Error;
 		}
 	};
 }
-const search = new SearchSchedulingAdapter();
-
-const check = new CheckAppointmentServices(search);
-const date = new Date("2025-02-13T12:40");
-check.check(date);

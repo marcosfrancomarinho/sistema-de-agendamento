@@ -1,3 +1,3 @@
 export interface ICheckAppointmentServices {
-	check(dataHoursCheduling: Date): Promise<any>;
+	check(dataHoursCheduling: Date): Promise<boolean>;
 }

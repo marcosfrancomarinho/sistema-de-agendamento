@@ -5,13 +5,12 @@ import { CreateSchedulingServices } from "../services/create.scheduling.services
 
 import { CheckDatasBodyRequestMiddleware } from "../middleware/check.datas.body.request.middleware";
 import { VerifyDatasAdapter } from "../repository/verify.datas.adapter";
-
-import { FormatDataHours } from "../utils/format.data.hours";
+import { CheckAppointmentServices } from "../services/check.appointment.services";
 
 const createSchedulingAdapter = new CreateSchedulingAdapter();
 const searchSchedulingAdapter = new SearchSchedulingAdapter();
-const formatDataHours = new FormatDataHours();
-const createSchedulingServices = new CreateSchedulingServices(createSchedulingAdapter);
+const checkAppointmentServices = new CheckAppointmentServices(searchSchedulingAdapter);
+const createSchedulingServices = new CreateSchedulingServices(createSchedulingAdapter, checkAppointmentServices);
 const createSchedulingControllers = new CreateSchedulingControlllers(createSchedulingServices);
 
 const verifyDatasAdapter = new VerifyDatasAdapter();
