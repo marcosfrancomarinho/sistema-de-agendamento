@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ICreateSchedulingControllers, IMessageSuccess, IScheduleData } from "../@types/controllers/create.scheduling";
 import { ICreateSchedulingServices } from "../@types/services/create.scheduling.services";
-import { IQueryResult } from "../@types/integrations/create.scheduling";
+import { IQueryResult } from "../@types/repository/create.scheduling";
 
 export class CreateSchedulingControlllers implements ICreateSchedulingControllers {
 	constructor(private createSchedulingServices: ICreateSchedulingServices) {}

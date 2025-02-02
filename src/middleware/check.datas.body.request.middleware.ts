@@ -1,6 +1,6 @@
 import { Request, NextFunction, Response } from "express";
 import { ICheckDatasBodyRequestMiddleware } from "../@types/middleware/check.datas.body.request.middleware";
-import { IVerifyDatasAdapter } from "../@types/integrations/verify.datas.adapter";
+import { IVerifyDatasAdapter } from "../@types/repository/verify.datas.adapter";
 import { IScheduleData } from "../@types/controllers/create.scheduling";
 
 export class CheckDatasBodyRequestMiddleware implements ICheckDatasBodyRequestMiddleware {

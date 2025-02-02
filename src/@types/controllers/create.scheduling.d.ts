@@ -7,7 +7,7 @@ export type IScheduleData = {
 	name: string;
 	email: string;
 	phone: string;
-	data_hour: string;
+	data_hour: Date;
 };
 export type IMessageSuccess = {
 	message: string;

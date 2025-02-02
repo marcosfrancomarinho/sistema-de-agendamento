@@ -1,9 +1,9 @@
 import { IScheduleData } from "../@types/controllers/create.scheduling";
-import { IVerifyDatasAdapter } from "../@types/integrations/verify.datas.adapter";
+import { IVerifyDatasAdapter } from "../@types/repository/verify.datas.adapter";
 import Joi, { ValidationError } from "joi";
 
 export class VerifyDatasAdapter implements IVerifyDatasAdapter {
-	public checkDatasBodyRequest = async (name: string, email: string, phone: string, data_hour: string): Promise<void> => {
+	public checkDatasBodyRequest = async (name: string, email: string, phone: string, data_hour: Date): Promise<void> => {
 		try {
 			const schema = Joi.object<IScheduleData>({
 				name: Joi.string()
