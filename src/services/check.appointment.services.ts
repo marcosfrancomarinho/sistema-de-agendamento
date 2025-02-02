@@ -16,7 +16,7 @@ export class CheckAppointmentServices implements ICheckAppointmentServices {
 	};
 	private businessHoursPicker = (requestedDateAndTime: Date): void => {
 		const day: number = requestedDateAndTime.getDay();
-		const hours = requestedDateAndTime.getMinutes();
+		const hours = requestedDateAndTime.getHours();
 		enum weekBusines {
 			saturday = 6,
 			sunday = 0,
