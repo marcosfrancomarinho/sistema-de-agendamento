@@ -15,22 +15,20 @@ export class CheckAppointmentServices implements ICheckAppointmentServices {
 		return time;
 	};
 	private businessHoursPicker = (requestedDateAndTime: Date): void => {
+		const MINUTES_IN_ONE_HOUR: number = 60;
 		const day: number = requestedDateAndTime.getDay();
-		const hours = requestedDateAndTime.getHours();
-		enum weekBusines {
+		const minutes: number = requestedDateAndTime.getHours() * MINUTES_IN_ONE_HOUR + requestedDateAndTime.getMinutes();
+		enum HoursBusiness {
 			saturday = 6,
 			sunday = 0,
+			start = 8 * MINUTES_IN_ONE_HOUR,
+			end = 17 * MINUTES_IN_ONE_HOUR + 30,
 		}
-		enum hoursBusinnes {
-			start = 8,
-			end = 17,
+		if (day === HoursBusiness.saturday || day === HoursBusiness.sunday) {
+			throw new Error("sábado e domingo está fechado, funcionamento de seg a sex.");
 		}
-		if (day === weekBusines.saturday || day === weekBusines.sunday) {
-			throw new Error("sábado e domingo está fechado.");
-		}
-		//ainda falta fazer essa parte
-		if (hours < hoursBusinnes.start || hours > hoursBusinnes.end) {
-			throw new Error("agendamento apenas das 8h as 17h");
+		if (minutes < HoursBusiness.start || minutes > HoursBusiness.end) {
+			throw new Error("agendamento apenas das 8h as 17:30h");
 		}
 	};
 	private appointmentAvailabilityChecker = (requestedDateAndTime: Date, scheduledDateAndTimes: Date): void => {
@@ -41,7 +39,7 @@ export class CheckAppointmentServices implements ICheckAppointmentServices {
 			requestedDateAndTime.getTime() <= alreadyBusyHours.getTime() &&
 			requestedDateAndTime.getTime() >= unavailableHours.getTime()
 		) {
-			throw new Error("horário de agendamento indisponível ou ocupado");
+			throw new Error("horário de agendamento ocupado");
 		}
 	};
 	public check = async (scheduledDateAndTimes: Date): Promise<boolean> => {
