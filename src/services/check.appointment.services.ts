@@ -2,14 +2,14 @@ import { IResponseSearchDataBase, ISearchSchedulingAdapter } from "../@types/rep
 import { ICheckAppointmentServices } from "../@types/services/check.appointment.services";
 
 export class CheckAppointmentServices implements ICheckAppointmentServices {
-	private SERVICE_TIME: number = 30;
 	constructor(private searchSchedulingAdapter: ISearchSchedulingAdapter) {}
+	private SERVICE_TIME: number = 30;
 	private pastsCheduleChecker = (scheduledDateAndTimes: Date): void => {
 		const currentHours: Date = new Date();
 		currentHours.setSeconds(0, 0);
 		if (scheduledDateAndTimes.getTime() <= currentHours.getTime()) throw new Error("não pode informar uma data passada.");
 	};
-	private reserveTime = (scheduledDateAndTimes: Date, indice: number) => {
+	private reserveTime = (scheduledDateAndTimes: Date, indice: number): Date => {
 		const time: Date = new Date(scheduledDateAndTimes.getTime());
 		time.setMinutes(time.getMinutes() + this.SERVICE_TIME * indice);
 		return time;
@@ -58,3 +58,4 @@ export class CheckAppointmentServices implements ICheckAppointmentServices {
 		}
 	};
 }
+
