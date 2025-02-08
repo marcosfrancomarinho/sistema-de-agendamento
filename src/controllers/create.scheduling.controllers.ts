@@ -1,13 +1,13 @@
-import { Request, Response, NextFunction } from "express";
-import { ICreateSchedulingControllers, IMessageSuccess, IScheduleData } from "../@types/controllers/create.scheduling";
-import { ICreateSchedulingServices } from "../@types/services/create.scheduling.services";
-import { IQueryResult } from "../@types/repository/create.scheduling";
+import { Request, Response, NextFunction } from 'express';
+import { ICreateSchedulingControllers, IMessageSuccess, IScheduleData } from '../@types/controllers/create.scheduling';
+import { ICreateSchedulingServices } from '../@types/services/create.scheduling.services';
+import { IQueryResult } from '../@types/repository/create.scheduling';
 
 export class CreateSchedulingControlllers implements ICreateSchedulingControllers {
 	constructor(private createSchedulingServices: ICreateSchedulingServices) {}
 	private messageSuccess = (id: string): IMessageSuccess => {
 		return {
-			message: "agendamento realizado com sucesso",
+			message: 'agendamento realizado com sucesso',
 			idUser: id,
 		};
 	};

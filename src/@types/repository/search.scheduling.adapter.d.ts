@@ -1,7 +1,9 @@
-import { IScheduleData } from "../controllers/create.scheduling";
+import { IScheduleData } from '../controllers/create.scheduling';
 
-export type IResponseSearchDataBase = Pick<IScheduleData, "datahours" | "name">;
-
+export interface IResponseSearchDataBase extends IScheduleData {
+	id: number;
+}
 export interface ISearchSchedulingAdapter {
 	selectDb(): Promise<IResponseSearchDataBase[]>;
+	selectDbOne(id: number): Promise<IResponseSearchDataBase | null>;
 }

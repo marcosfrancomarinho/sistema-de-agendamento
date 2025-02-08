@@ -6,4 +6,3 @@ CREATE TABLE
         phone VARCHAR NOT NULL,
         datahours TIMESTAMP
     );
-

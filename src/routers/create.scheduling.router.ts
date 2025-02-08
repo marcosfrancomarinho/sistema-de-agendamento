@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { createSchedulingControllers, checkDatasBodyRequestMiddleware } from "../configs/intances";
+import { Router } from 'express';
+import { createSchedulingControllers, checkDatasBodyRequestMiddlewares } from '../configs/intances';
 
 const createSchedulingRouter = Router();
 
-createSchedulingRouter.post("/", checkDatasBodyRequestMiddleware.valiadate, createSchedulingControllers.execute);
+createSchedulingRouter.post('/', checkDatasBodyRequestMiddlewares.valiadate, createSchedulingControllers.execute);
 
 export { createSchedulingRouter };

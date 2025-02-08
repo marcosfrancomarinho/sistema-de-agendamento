@@ -1,4 +1,4 @@
-import pg from "pg";
+import pg from 'pg';
 
 const connectionToDatabase = new pg.Pool({
 	connectionString: process.env.DB_URL,

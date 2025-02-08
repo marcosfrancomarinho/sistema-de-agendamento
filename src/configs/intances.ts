@@ -1,11 +1,13 @@
-import { CreateSchedulingControlllers } from "../controllers/create.scheduling.controllers";
-import { CreateSchedulingAdapter } from "../repository/create.scheduling.adapter";
-import { SearchSchedulingAdapter } from "../repository/search.scheduling.adapter";
-import { CreateSchedulingServices } from "../services/create.scheduling.services";
+import { CreateSchedulingControlllers } from '../controllers/create.scheduling.controllers';
+import { CreateSchedulingAdapter } from '../repository/create.scheduling.adapter';
+import { SearchSchedulingAdapter } from '../repository/search.scheduling.adapter';
+import { CreateSchedulingServices } from '../services/create.scheduling.services';
+import { SearchSchedulingControlllers } from '../controllers/search.scheduling.controllers';
+import { SearchSchedulingServices } from '../services/search.scheduling.services';
 
-import { CheckDatasBodyRequestMiddleware } from "../middleware/check.datas.body.request.middleware";
-import { VerifyDatasAdapter } from "../repository/verify.datas.adapter";
-import { CheckAppointmentServices } from "../services/check.appointment.services";
+import { CheckDatasBodyRequestMiddlewares } from '../middleware/check.datas.body.request.middleware';
+import { VerifyDatasAdapter } from '../repository/verify.datas.adapter';
+import { CheckAppointmentServices } from '../services/check.appointment.services';
 
 const createSchedulingAdapter = new CreateSchedulingAdapter();
 const searchSchedulingAdapter = new SearchSchedulingAdapter();
@@ -14,6 +16,9 @@ const createSchedulingServices = new CreateSchedulingServices(createSchedulingAd
 const createSchedulingControllers = new CreateSchedulingControlllers(createSchedulingServices);
 
 const verifyDatasAdapter = new VerifyDatasAdapter();
-const checkDatasBodyRequestMiddleware = new CheckDatasBodyRequestMiddleware(verifyDatasAdapter);
+const checkDatasBodyRequestMiddlewares = new CheckDatasBodyRequestMiddlewares(verifyDatasAdapter);
 
-export { createSchedulingControllers, checkDatasBodyRequestMiddleware };
+const searchSchedulingServices = new SearchSchedulingServices(searchSchedulingAdapter);
+const searchSchedulingControlllers = new SearchSchedulingControlllers(searchSchedulingServices);
+
+export { createSchedulingControllers, checkDatasBodyRequestMiddlewares, searchSchedulingControlllers };

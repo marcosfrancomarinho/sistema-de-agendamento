@@ -1,5 +1,5 @@
-import { IResponseSearchDataBase, ISearchSchedulingAdapter } from "../@types/repository/search.scheduling.adapter";
-import { ICheckAppointmentServices } from "../@types/services/check.appointment.services";
+import { IResponseSearchDataBase, ISearchSchedulingAdapter } from '../@types/repository/search.scheduling.adapter';
+import { ICheckAppointmentServices } from '../@types/services/check.appointment.services';
 
 export class CheckAppointmentServices implements ICheckAppointmentServices {
 	constructor(private searchSchedulingAdapter: ISearchSchedulingAdapter) {}
@@ -7,7 +7,7 @@ export class CheckAppointmentServices implements ICheckAppointmentServices {
 	private pastsCheduleChecker = (scheduledDateAndTimes: Date): void => {
 		const currentHours: Date = new Date();
 		currentHours.setSeconds(0, 0);
-		if (scheduledDateAndTimes.getTime() <= currentHours.getTime()) throw new Error("não pode informar uma data passada.");
+		if (scheduledDateAndTimes.getTime() <= currentHours.getTime()) throw new Error('não pode informar uma data passada.');
 	};
 	private reserveTime = (scheduledDateAndTimes: Date, indice: number): Date => {
 		const time: Date = new Date(scheduledDateAndTimes.getTime());
@@ -25,10 +25,10 @@ export class CheckAppointmentServices implements ICheckAppointmentServices {
 			end = 17 * MINUTES_IN_ONE_HOUR + 30,
 		}
 		if (day === HoursBusiness.saturday || day === HoursBusiness.sunday) {
-			throw new Error("sábado e domingo está fechado, funcionamento de seg a sex.");
+			throw new Error('sábado e domingo está fechado, funcionamento de seg a sex.');
 		}
 		if (minutes < HoursBusiness.start || minutes > HoursBusiness.end) {
-			throw new Error("agendamento apenas das 8h as 17:30h");
+			throw new Error('agendamento apenas das 8h as 17:30h');
 		}
 	};
 	private appointmentAvailabilityChecker = (requestedDateAndTime: Date, scheduledDateAndTimes: Date): void => {
@@ -39,7 +39,7 @@ export class CheckAppointmentServices implements ICheckAppointmentServices {
 			requestedDateAndTime.getTime() <= alreadyBusyHours.getTime() &&
 			requestedDateAndTime.getTime() >= unavailableHours.getTime()
 		) {
-			throw new Error("horário de agendamento ocupado");
+			throw new Error('horário de agendamento ocupado');
 		}
 	};
 	public check = async (scheduledDateAndTimes: Date): Promise<boolean> => {
@@ -58,4 +58,3 @@ export class CheckAppointmentServices implements ICheckAppointmentServices {
 		}
 	};
 }
-
