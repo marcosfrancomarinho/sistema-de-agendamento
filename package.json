@@ -7,7 +7,7 @@
 		"dev": "tsx --watch --env-file=.env src/app.ts",
 		"start": "node dist/bundle.min.js",
 		"build": "node esbuild.config.js",
-		"check": "tsc --watch --noEmit",
+		"verify": "tsc --watch --noEmit",
 		"db": "tsx --env-file=.env src/integrations/create.scheduling.ts"
 	},
 	"devDependencies": {
@@ -16,12 +16,12 @@
 		"@types/joi": "^17.2.3",
 		"@types/node": "^22.13.0",
 		"@types/pg": "^8.11.11",
+		"esbuild": "^0.25.0",
 		"tsx": "^4.19.2",
 		"typescript": "^5.7.3"
 	},
 	"dependencies": {
 		"cors": "^2.8.5",
-		"esbuild": "^0.24.2",
 		"express": "^4.21.2",
 		"joi": "^17.13.3",
 		"pg": "^8.13.1"

@@ -14,6 +14,7 @@ export class CheckDatasBodyRequestMiddlewares implements ICheckDatasBodyRequestM
 			response.status(400).json({ error: (error as Error).message });
 		}
 	};
+	
 	public validateId = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
 		try {
 			const id: number = Number(request.params.id);

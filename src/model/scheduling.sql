@@ -4,5 +4,6 @@ CREATE TABLE
         name VARCHAR NOT NULL,
         email VARCHAR NOT NULL,
         phone VARCHAR NOT NULL,
-        datahours TIMESTAMP
+        datahours TIMESTAMP,
+        done BOOLEAN DEFAULT false
     );

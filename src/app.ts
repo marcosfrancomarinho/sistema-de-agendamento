@@ -8,5 +8,4 @@ app.use(cors());
 app.use(express.json());
 app.use(routerMain);
 app.use(handleError);
-
 app.listen(port, () => console.log(`server online on http://localhost:${port}`));

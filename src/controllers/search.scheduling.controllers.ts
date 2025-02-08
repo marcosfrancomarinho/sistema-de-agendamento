@@ -7,8 +7,8 @@ export class SearchSchedulingControlllers implements ISearchSchedulingAdapterCon
 	constructor(private searchSchedulingServices: ISearchSchedulingServices) {}
 	public execute = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
 		try {
-			const scheduling: IResponseSearchDataBase[] = await this.searchSchedulingServices.findAll();
-			response.status(200).json(scheduling);
+			const appointments: IResponseSearchDataBase[] = await this.searchSchedulingServices.findAll();
+			response.status(200).json(appointments);
 		} catch (error) {
 			next(error);
 		}
