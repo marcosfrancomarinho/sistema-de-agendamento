@@ -7,7 +7,7 @@
 		"dev": "tsx --watch --env-file=.env src/app.ts",
 		"start": "node dist/bundle.min.js",
 		"build": "node esbuild.config.js",
-		"verify": "tsc --watch --noEmit",
+		"check-type": "tsc --watch --noEmit",
 		"db": "tsx --env-file=.env src/integrations/create.scheduling.ts"
 	},
 	"devDependencies": {

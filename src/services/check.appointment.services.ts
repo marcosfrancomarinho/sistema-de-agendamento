@@ -9,7 +9,7 @@ export class CheckAppointmentServices implements ICheckAppointmentServices {
 	private readonly WEEKEND_DAYS: Set<number> = new Set([0, 6]); // Domingo e Sábado
 
 	constructor(private searchSchedulingAdapter: ISearchSchedulingAdapter) {}
-
+	
 	private checkPastSchedule(scheduledDateAndTime: Date): void {
 		const currentDateTime: Date = new Date();
 		currentDateTime.setSeconds(0, 0);

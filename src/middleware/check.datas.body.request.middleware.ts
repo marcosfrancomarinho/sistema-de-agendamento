@@ -5,6 +5,7 @@ import { IScheduleData } from '../@types/controllers/create.scheduling';
 
 export class CheckDatasBodyRequestMiddlewares implements ICheckDatasBodyRequestMiddlewares {
 	constructor(private verifyDatasAdapter: IVerifyDatasAdapter) {}
+	
 	public valiadate = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
 		try {
 			const { name, email, phone, datahours } = request.body as IScheduleData;

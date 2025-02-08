@@ -5,6 +5,7 @@ import { IResponseSearchDataBase } from '../@types/repository/search.scheduling.
 
 export class SearchSchedulingControlllers implements ISearchSchedulingAdapterControllers {
 	constructor(private searchSchedulingServices: ISearchSchedulingServices) {}
+	
 	public execute = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
 		try {
 			const appointments: IResponseSearchDataBase[] = await this.searchSchedulingServices.findAll();

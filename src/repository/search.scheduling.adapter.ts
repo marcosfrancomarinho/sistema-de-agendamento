@@ -6,6 +6,7 @@ export class SearchSchedulingAdapter implements ISearchSchedulingAdapter {
 		one: 'SELECT * FROM scheduling_user WHERE id=$1',
 		all: 'SELECT * FROM scheduling_user',
 	};
+
 	public selectDb = async (): Promise<IResponseSearchDataBase[]> => {
 		try {
 			const { rows } = await connectionToDatabase.query<IResponseSearchDataBase>(this.sql.all);
@@ -14,6 +15,7 @@ export class SearchSchedulingAdapter implements ISearchSchedulingAdapter {
 			throw error as Error;
 		}
 	};
+	
 	public selectDbOne = async (id: number): Promise<IResponseSearchDataBase | null> => {
 		try {
 			const { rows } = await connectionToDatabase.query<IResponseSearchDataBase>(this.sql.one, [id]);

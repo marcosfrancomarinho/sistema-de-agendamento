@@ -3,6 +3,7 @@ import { ISearchSchedulingServices } from '../@types/services/search.scheduling.
 
 export class SearchSchedulingServices implements ISearchSchedulingServices {
 	constructor(private searchSchedulingAdapter: ISearchSchedulingAdapter) {}
+
 	public finOne = async (id: number): Promise<IResponseSearchDataBase> => {
 		try {
 			const responseQuerySearchDatabaseOne = (await this.searchSchedulingAdapter.selectDbOne(id)) as IResponseSearchDataBase;
@@ -12,6 +13,7 @@ export class SearchSchedulingServices implements ISearchSchedulingServices {
 			throw error as Error;
 		}
 	};
+	
 	public findAll = async (): Promise<IResponseSearchDataBase[]> => {
 		try {
 			const responseQuerySearchDatabase: IResponseSearchDataBase[] = await this.searchSchedulingAdapter.selectDb();

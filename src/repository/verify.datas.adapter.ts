@@ -36,6 +36,7 @@ export class VerifyDatasAdapter implements IVerifyDatasAdapter {
 			throw new Error(message);
 		}
 	};
+	
 	public checkIDBodyRequest = async (id: number): Promise<void> => {
 		try {
 			const schema = Joi.number().required().id().empty().label('id do agendamento');

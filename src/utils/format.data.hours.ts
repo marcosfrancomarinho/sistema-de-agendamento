@@ -1,6 +1,7 @@
 import { IFormatDataHours, IResponseFormatDataHours } from '../@types/utils/format.data.hours';
 
 export class FormatDataHours implements IFormatDataHours {
+	
 	public format = (datahours: Date): IResponseFormatDataHours => {
 		const dataStringFormat = new Date(datahours).toLocaleDateString('pt-BR', {
 			day: '2-digit',
